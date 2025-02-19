@@ -1,2 +1,2 @@
-# NLP-Project-hate-speech-classification
-NLP project hate speech classification using DL
+# End to End NLP Project: hate-speech-classification using DL.
+
