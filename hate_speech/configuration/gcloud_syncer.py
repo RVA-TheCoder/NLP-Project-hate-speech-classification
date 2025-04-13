@@ -7,8 +7,8 @@ class GCloudSync:
     Parameters : 
     (a) gcp_bucket_url: bucket name in the gcp (bucket cloud)
     (b) filename: name of the file present in the above gcp bucket, filename should match exactly
-    (c) destination: name given to the file being downloaded from the gcp bucket to our project directory.
-    
+    (c) destination: path of the project directory where file being downloaded from the gcp bucket will be saved inside.
+         
     """
 
     def sync_folder_to_gcloud(self, gcp_bucket_url, filepath, filename):
