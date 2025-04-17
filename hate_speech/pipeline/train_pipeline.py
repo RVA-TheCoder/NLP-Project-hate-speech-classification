@@ -167,7 +167,13 @@ class TrainPipeline:
 
             if not model_evaluation_artifacts.is_model_accepted:
                 
-                raise Exception("Trained model is not better than the best/Production model.")
+                print("Trained model is not better than the best/Production model.")
+                print("Therefore, No need to push the Trained model to GCP Bucket storage for production use.")
+                logging.info("Trained model is not better than the best/Production model.")
+                
+                # Originally, I used raise Exception.
+                #raise Exception("Trained model is not better than the best/Production model.")
+                
             
             else:
                 

@@ -9,7 +9,7 @@ from hate_speech.entity.artifact_entity import ModelPusherArtifacts
 
 class ModelPusher:
     
-    def __init(self, model_pusher_config:ModelPusherConfig):
+    def __init__(self, model_pusher_config:ModelPusherConfig):
         
         self.model_pusher_config=model_pusher_config
         self.gcloud=GCloudSync()

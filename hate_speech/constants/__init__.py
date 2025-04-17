@@ -58,6 +58,7 @@ MODEL_EVALUATION_ARTIFACTS_DIR='ModelEvaluationArtifacts'
 BEST_MODEL_DIR='best_model'
 MODEL_EVALUATION_FILENAME='loss.csv'
 
+# This name is used for best/production model
 MODEL_NAME='trained_model.keras'
 APP_HOST="0.0.0.0"
 APP_PORT=8080

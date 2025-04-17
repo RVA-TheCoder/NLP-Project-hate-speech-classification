@@ -104,7 +104,7 @@ class ModelEvaluation:
             print(f"x_test shape : {x_test.shape}\n")
             print(f"y_test shape : {y_test.shape}")
             
-            test_sequences=tokenizer.text_to_sequences(x_test)
+            test_sequences=tokenizer.texts_to_sequences(x_test)
             test_sequences_matrix=pad_sequences(test_sequences, maxlen=MAX_LEN)
             
             
@@ -187,18 +187,19 @@ class ModelEvaluation:
                 best_loaded_model= keras.models.load_model(best_model_path)
                 
                 best_loaded_model_accuracy = self.evaluate(loaded_model=best_loaded_model)
-                print(f"Best/Prodcution model accuracy : {best_loaded_model_accuracy}")
+                print(f"Best/Production model accuracy : {best_loaded_model_accuracy}")
                 
                 logging.info("Comparing the accuracy on test data using trained and best/production model.")
                 
                 if best_loaded_model_accuracy > trained_model_accuracy :
                     
+                    print("Best/Production model accuracy is more than trained model accuracy.")
                     is_model_accepted = False
                     
                     logging.info("Trained model not accepted")
                     
                 else :
-                    
+                    print("Best/Production model accuracy is lower than trained model accuracy.")
                     is_model_accepted = True 
                     logging.info("Trained model accepted")
                     

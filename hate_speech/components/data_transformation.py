@@ -78,6 +78,9 @@ class DataTransformation:
         
     def concat_dataframe(self,dfs):
         
+        """
+            dfs : list of pandas DFs to be concatenated.
+        """
         try:
             
             logging.info("Entered into the concat_dataframe method of class DataTransformation inside hate_speech/components/data_transformation.py")
