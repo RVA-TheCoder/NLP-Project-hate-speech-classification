@@ -45,7 +45,7 @@ api:
   auth_token: ca80e1c6c28296e50806caaf44811655253cc59351eeadef5029df6515a7312a8cd833f198a9c98e
 
 runner:
-  name: self-hosted
+  name: hatespeechprojhostedrunner
   working_directory: /var/opt/circleci/workdir
   cleanup_working_directory: true
 
