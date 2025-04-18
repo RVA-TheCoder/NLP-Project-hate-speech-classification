@@ -1,5 +1,8 @@
-# Setup Docker and update system
-#sudo apt-get update
+# Setup Docker and update system :
+
+# Update package list
+sudo apt-get update
+# Upgrade all installed packages
 sudo apt-get upgrade -y
 sudo apt install apt-transport-https ca-certificates curl software-properties-common -y
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
@@ -37,9 +40,9 @@ sudo touch /etc/opt/circleci/launch-agent-config.yaml
 sudo nano /etc/opt/circleci/launch-agent-config.yaml
 
 
-# Add API in the file and change permissions
+# Add API in the file and change permissions (auth_token : from CircleCI selfhosted runner)
 api:
-  auth_token: 17f70d59d059a9c24d6e37d51afb969f8ccf10124be54033a0a2b0f8a645a7e187ec1551d3d07042
+  auth_token: ca80e1c6c28296e50806caaf44811655253cc59351eeadef5029df6515a7312a8cd833f198a9c98e
 
 runner:
   name: self-hosted
@@ -107,8 +110,9 @@ sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --u
 
 
 
-# add them inside environment variables
+# add them inside environment variables (from .csv iam user file that was downloaded)
+# for this type at the ec2 vm terminal and press enter, syntax : aws configure
 AWS_ACCESS_KEY_ID
 AWS_SECRET_ACCESS_KEY
-AWS_REGION
-AWS_ECR_REGISTRY_ID
+AWS_REGION : us-east-1
+AWS_ECR_REGISTRY_ID : this AWS account ID
