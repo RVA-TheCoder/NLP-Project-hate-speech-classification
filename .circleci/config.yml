@@ -49,7 +49,7 @@ workflows:
       - continuous-integration
       - continuous-delivery:
           requires:
-            - continuous-integration
+          - continuous-integration
 
 
       
