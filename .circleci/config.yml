@@ -19,14 +19,14 @@ jobs:
           platform: linux/amd64
           push-image: true
           region: '${AWS_REGION}'
-          repo: hatespeechprojecr
+          repo: hatespeechprojecr  # name of the AWS ecr repo
           registry-id: AWS_ECR_REGISTRY_ID
           repo-scan-on-push: true
           tag: latest
 
   continuous-delivery:
     machine: true
-    resource_class: aakash/hatespeechprojhostedrunner
+    resource_class: aakash/hatespeechprojrunner
     steps:
       - aws-cli/setup
 
