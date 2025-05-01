@@ -39,6 +39,7 @@ async def predict_route(text):
         return result
     
     except Exception as e:
+        
         raise CustomException(e, sys) from e
     
 
