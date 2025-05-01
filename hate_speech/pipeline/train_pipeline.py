@@ -1,9 +1,10 @@
 import sys
+
 from hate_speech.logger import logging
 from hate_speech.exception import CustomException
+
 from hate_speech.components.data_ingestion import DataIngestion
 from hate_speech.components.data_transformation import DataTransformation
-
 from hate_speech.components.model_trainer import ModelTrainer
 from hate_speech.components.model_evaluation import ModelEvaluation
 from hate_speech.components.model_pusher import ModelPusher
@@ -23,7 +24,6 @@ from hate_speech.entity.artifact_entity import (DataIngestionArtifacts,
 
 
 
-
 class TrainPipeline:
     
     def __init__(self):
@@ -36,19 +36,17 @@ class TrainPipeline:
         
         
         
-        
-    
     def start_data_ingestion(self) -> DataIngestionArtifacts :
         
         logging.info("Entered the start_data_ingestion method of TrainPipeline class in hate_speech/pipeline/train_pipeline.py")
         
         try:
-            logging.info("Geting the dta from GCLOUD Storage bucket")
+            logging.info("Geting the data from GCS bucket")
             
             # Creating the object of the class DataIngestion
             data_ingestion=DataIngestion(data_ingestion_config=self.data_ingestion_config)
             
-            # returing the DataIngestionArtifacts class object as data_ingestion_artifacts
+            # returing the object of DataIngestionArtifacts class as data_ingestion_artifacts
             data_ingestion_artifacts=data_ingestion.initiate_data_ingestion()
             
             logging.info("Exited the start_data_ingestion method of TrainPipeline class in hate_speech/pipeline/train_pipeline.py")
@@ -58,6 +56,7 @@ class TrainPipeline:
         except Exception as e :
             raise CustomException(e, sys) from e
         
+    
         
     def start_data_transformation(self, data_ingestion_artifacts:DataIngestionArtifacts) -> DataTransformationArtifacts:
         
@@ -86,6 +85,7 @@ class TrainPipeline:
         
         try:
             
+            # creating the object of ModelTrainer class
             model_trainer = ModelTrainer(data_transformation_artifacts=data_transformation_artifacts,
                                          model_trainer_config=self.model_trainer_config
                                         )
@@ -101,8 +101,8 @@ class TrainPipeline:
         
         
     def start_model_evaluation(self, 
-                               model_trainer_artifacts: ModelTrainerArtifacts, 
-                               data_transformation_artifacts: DataTransformationArtifacts
+                               data_transformation_artifacts: DataTransformationArtifacts ,
+                               model_trainer_artifacts: ModelTrainerArtifacts   
                                ) -> ModelEvaluationArtifacts:
         
         logging.info("Entered the start_model_evaluation method of TrainPipeline class inside hate_speech/pipeline/train_pipeline.py ")
@@ -110,8 +110,9 @@ class TrainPipeline:
         try:
             
             model_evaluation = ModelEvaluation(data_transformation_artifacts = data_transformation_artifacts,
-                                               model_evaluation_config=self.model_evaluation_config,
-                                               model_trainer_artifacts=model_trainer_artifacts)
+                                               model_trainer_artifacts=model_trainer_artifacts,
+                                               model_evaluation_config=self.model_evaluation_config
+                                               )
 
             model_evaluation_artifacts = model_evaluation.initiate_model_evaluation()
             
@@ -164,22 +165,21 @@ class TrainPipeline:
             model_evaluation_artifacts = self.start_model_evaluation(model_trainer_artifacts=model_trainer_artifacts,
                                                                     data_transformation_artifacts=data_transformation_artifacts
                                                                     ) 
-
-            if not model_evaluation_artifacts.is_model_accepted:
+            # For debugging purpose
+            print("model_evaluation_artifacts : ",model_evaluation_artifacts,"\n\n")
+            
+            if not model_evaluation_artifacts.is_trained_model_accepted:
                 
-                print("Trained model is not better than the best/Production model.")
-                print("Therefore, No need to push the Trained model to GCP Bucket storage for production use.")
-                logging.info("Trained model is not better than the best/Production model.")
-                
-                # Originally, I used raise Exception.
-                #raise Exception("Trained model is not better than the best/Production model.")
-                
+                print("Trained model is not better than the gcs model.")
+                print("Therefore, No need to push the Trained model to GCS Bucket storage for production use.")
+                logging.info("Trained model is not better than the GCS model.")
+                  
             
             else:
                 
-                # Pushing the trained model to gcloud
+                # Pushing the trained model to GCS bucket for production use
                 model_pusher_artifacts=self.start_model_pusher()
-            
+                print("Pushed the trained model to GCS bucket......")
               
             logging.info("Exited the run_pipline method of TrainPipeline class in hate_speech/pipeline/train_pipeline.py")
             

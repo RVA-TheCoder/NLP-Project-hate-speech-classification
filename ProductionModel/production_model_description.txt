@@ -1,0 +1,24 @@
+# Model Architecture constants
+MAX_WORDS=50000   
+MAX_LEN=100
+LOSS='binary_crossentropy'
+METRICS=['accuracy']
+ACTIVATION='sigmoid'
+
+
+# Model architecture:
+
+model = Sequential()
+model.add( Embedding(MAX_WORDS, MAX_LEN) )
+model.add( SpatialDropout1D(0.2) )
+model.add( LSTM(100,dropout=0.2,) )
+model.add( Dense(1,activation=ACTIVATION) )
+model.summary()
+
+      
+# Model compilation
+model.compile(loss=LOSS,
+              optimizer=Adam(),
+              metrics=METRICS
+            )
+

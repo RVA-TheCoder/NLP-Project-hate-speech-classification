@@ -16,11 +16,8 @@ from hate_speech.configuration.gcloud_syncer import GCloudSync
 #     raise CustomException(e, sys) from e
 
 
-gcloud_obj=GCloudSync()
-# downloading the file from the gcp bucket
-gcloud_obj.sync_folder_from_gcloud(gcp_bucket_url="hate-speech-project01", 
-                                   filename="dataset.zip",
-                                   destination="data/dataset.zip")
+
+
 
 
 

@@ -17,7 +17,7 @@ from hate_speech.exception import CustomException
 from hate_speech.constants import *
 
 
-text:str = "What is machine learing?"
+#text:str = "What is machine learing?"
 
 app = FastAPI()
 
@@ -27,19 +27,6 @@ async def index():
 
 
 
-# @app.get("/train")
-# async def training():
-#     try:
-#         train_pipeline = TrainPipeline()
-
-#         train_pipeline.run_pipeline()
-
-#         return Response("Training successful !!")
-
-#     except Exception as e:
-#         return Response(f"Error Occurred! {e}")
-    
-
 
 @app.post("/predict")
 async def predict_route(text):
@@ -47,9 +34,9 @@ async def predict_route(text):
     try:
 
         obj = PredictionPipeline()
-        text = obj.run_pipeline(text)
+        result = obj.run_pipeline(text)
         
-        return text
+        return result
     
     except Exception as e:
         raise CustomException(e, sys) from e
@@ -58,6 +45,7 @@ async def predict_route(text):
 
 
 if __name__=="__main__":
+    
     uvicorn.run(app, host=APP_HOST, port=APP_PORT)
     
     # After running the app.py file from the powershell terminal

@@ -3,9 +3,9 @@
 
 ## Project Workflows
 
-- constants
-- config_enity
-- artifact_enity
+- hate_speech/constants/__init__.py file  
+- hate_speech/entity/config_entity.py file
+- hate_speech/entity/artifact_entity.py file     
 - components
 - pipeline
 - app.py

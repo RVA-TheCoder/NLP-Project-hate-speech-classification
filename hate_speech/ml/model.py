@@ -20,7 +20,7 @@ class ModelArchitecture:
         # Creating model architecture.
         model = Sequential()
         #model1.add(Embedding(max_words,100,input_length=max_len))
-        model.add( Embedding(MAX_WORDS, 100) )
+        model.add( Embedding(MAX_WORDS, MAX_LEN) )
         model.add( SpatialDropout1D(0.2) )
         #model.add( LSTM(100,dropout=0.2,recurrent_dropout=0.2) )
         model.add( LSTM(100,dropout=0.2,) )
