@@ -27,7 +27,6 @@ async def index():
 
 
 
-
 @app.post("/predict")
 async def predict_route(text):
     
