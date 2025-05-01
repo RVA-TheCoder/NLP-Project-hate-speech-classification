@@ -48,9 +48,9 @@ gcloud init
 
 # AWS-CICD-Deployment-with-Github-Actions
 
-## 1. Login to AWS console.
+### 1. Login to AWS console.
 
-## 2. Create IAM user for deployment
+### 2. Create IAM user for deployment
 
 	#with specific access
 
@@ -65,13 +65,13 @@ gcloud init
 	2. AmazonEC2FullAccess
 
 	
-## 3. Create ECR repo to store/save docker image
+### 3. Create ECR repo to store/save docker image
     - Save the ECR URI: for eg., 56637...765.dkr.ecr.us-east-1.amazonaws.com/chicken
 
 	
-## 4. Create EC2 machine (Ubuntu) 
+### 4. Create EC2 machine (Ubuntu) 
 
-## 5. Open EC2 and Install docker in EC2 Machine by running below commands at the EC2 terminal:
+### 5. Open EC2 and Install docker in EC2 Machine by running below commands at the EC2 terminal:
 	
 	#optional
 
@@ -89,11 +89,11 @@ gcloud init
 
 	newgrp docker
 	
-# 6. Configure EC2 as self-hosted runner:
+### 6. Configure EC2 as self-hosted runner:
     - inside github project repo goto :->  setting>actions>runner>new self hosted runner> choose os> 
 	- then run commands one by one at the EC2 terminal mentioned by github while creating the `self-hosted` runner.
 
-# 7. Description: About the deployment
+### 7. Description: About the deployment
 
 	1. Build docker image of the source code
 
@@ -105,7 +105,7 @@ gcloud init
 
 	5. Lauch your docker image in EC2 instance
 
-# 8. Setup github secrets:
+### 8. Setup github secrets:
 
     AWS_ACCESS_KEY_ID=<from iam user .csv file>
 
